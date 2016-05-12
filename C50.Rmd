@@ -1,0 +1,32 @@
+---
+title: "C50"
+output: html_document
+---
+
+ 
+```{r}
+# This code loads the required packages:
+library(C50)
+library(printr)
+```
+
+```{r}
+# This code takes a sample of 100 rows from the iris dataset:
+train.indeces <- sample(1:nrow(iris), 100)
+iris.train <- iris[train.indeces, ]
+iris.test <- iris[-train.indeces, ]
+```
+
+```{r}
+# This code trains a model based on the training data:
+model <- C5.0(Species ~ ., data = iris.train)
+```
+
+```{r}
+#This code tests the model using the test data:
+results <- predict(object = model, newdata = iris.test, type = "class")
+```
+```{r}
+# This code generates a confusion matrix for the results:
+table(results, iris.test$Species)
+```
